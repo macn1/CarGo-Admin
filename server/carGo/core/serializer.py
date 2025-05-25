@@ -13,6 +13,6 @@ class expenseSeriazlizer(serializers.ModelSerializer):
         
 class incomeSerializer(serializers.ModelSerializer):
     class Meta:
-        models = Income
+        model = Income
         fields = '__all__'
         

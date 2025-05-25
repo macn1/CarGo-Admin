@@ -72,3 +72,34 @@ class expenseDetailsAPIView(APIView):
         expense = get_object_or_404(Expense,pk=pk)
         expense.delete()
         return Response({"message":"item deleted"},status=status.HTTP_204_NO_CONTENT)
+    
+class incomeListCreateAPIView(APIView):
+    def get(self,request):
+        incomes = Income.objects.all()
+        serializer = incomeSerializer(incomes,many=True)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+    
+    def post(self,request):
+        serializer = incomeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
+        
+class incomeDetaialAPIView(APIView):
+    def get(self,request,pk):
+        income = get_object_or_404(Income,pk=pk)
+        serializer = incomeSerializer(income)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+    
+    def put(Self,request,pk):
+        income = get_object_or_404(Income,pk=pk)
+        serializer = incomeSerializer(income,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_200_OK)
+        return Response({"message":"this item not found"})
+    
+    def delete(self,request,pk):
+        income = get_object_or_404(Income,pk=pk)
+        income.delete()
+        return Response({"message":"item deleted"},status=status.HTTP_204_NO_CONTENT)       
