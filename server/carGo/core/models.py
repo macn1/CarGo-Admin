@@ -8,7 +8,6 @@ class Car (models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
     year = models.PositiveBigIntegerField()
-    
 
 class Expense(models.Model):
     title = models.CharField(max_length=100)
